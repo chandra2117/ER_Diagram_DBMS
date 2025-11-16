@@ -24,11 +24,17 @@ FlexiFit Gym wants a database to manage its members, trainers, and fitness progr
 
 ## Entities and Attributes
 Entity	Attributes (PK, FK)	Notes
+
 Member	MemberID ,Membership	Store member details
+
 Trainer	TrainerID,Name,Email,PhoneNumber	Store Trainer details
+
 Program	ProgramID,Cost	Programs like Zumbz/yoga
+
 Session	SessionID,SessionDate	Tracks attendance
+
 Payment	PaymentID,Amount	Tracks payments by members
+
 ## Relationships and Constraints
 Relationship	Cardinality	Participation	Notes
 Member-Program	M:N	Optional(Member),Mandatory(Enrollment)	Member may or may not join programs
