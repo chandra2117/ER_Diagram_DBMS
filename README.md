@@ -21,65 +21,168 @@ FlexiFit Gym wants a database to manage its members, trainers, and fitness progr
 
 <img width="732" height="805" alt="image" src="https://github.com/user-attachments/assets/00f7be05-84f9-4d6e-8a1f-4302c5294767" />
 
-
 ## Entities and Attributes
-Entity	   Attributes(PK, FK)	                Notes
-
-Member	   MemberID,Membership	              Store member details
-
-Trainer	   TrainerID,Name,Email,PhoneNumber	  Store Trainer details
-
-Program	   ProgramID,Cost	                    Programs like Zumbz/yoga
-
-Session	   SessionID,SessionDate	            Tracks attendance
-
-Payment	   PaymentID,Amount	                  Tracks payments by members
+<table>
+  <tr>
+    <th>Entity</th>
+    <th>Attributes(PK, FK)</th>
+    <th>Notes</th>
+  </tr>
+  <tr>
+    <td>Member</td>
+    <td>MemberID,Membership</td>
+    <td>Store member details</td>
+  </tr>
+  <tr>
+    <td>Trainer</td>
+    <td>TrainerID,Name,Email,PhoneNumber</td>
+    <td>Store Trainer details</td>
+  </tr>
+  <tr>
+    <td>Program</td>
+    <td>ProgramID,Cost</td>
+    <td>Programs like Zumbz/yoga</td>
+  </tr>
+  <tr>
+    <td>Session</td>
+    <td>SessionID,SessionDate</td>
+    <td>Tracks attendance</td>
+  </tr>
+  <tr>
+    <td>Payment</td>
+    <td>PaymentID,Amount</td>
+    <td>Tracks payments by members</td>
+  </tr>             
+</table>
 
 ## Relationships and Constraints
-Relationship	Cardinality	Participation	Notes
-Member-Program	M:N	Optional(Member),Mandatory(Enrollment)	Member may or may not join programs
-Trainer-Program	M:N	Optional(Trainer),Mandatory(Assignment)	Trainer may or may not run Programs
-Member–Trainer	1:N	Mandatory (Session), Optional (Member/Trainer)	Session must have a member & trainer
+<table>
+  <tr>
+    <th>Relationship</th>
+    <th>Cardinality</th>
+    <th>Participation</th>
+    <th>Notes</th>
+  </tr>
+  <tr>
+    <td>Member-Program</td>
+    <td>M:N</td>
+    <td>Optional(Member),Mandatory(Enrollment)</td>
+    <td>Member may or may not join programs</td>
+  </tr>
+  <tr>
+    <td>Trainer-Program</td>
+    <td>M:N</td>
+    <td>Optional(Trainer),Mandatory(Assignment)</td>
+    <td>Trainer may or may not run Programs</td>
+  </tr>
+  <tr>
+    <td>Member–Trainer</td>
+    <td>1:N</td>
+    <td>Mandatory (Session), Optional (Member/Trainer)</td>
+    <td>Session must have a member & trainer</td>
+  </tr>
+</table>
+
 ## Assumptions
-Program = recurring class; Session = specific instance.
-Payments cover both memberships and sessions.
-A Session links one Member and one Trainer.
+  - Program = recurring class; Session = specific instance.
+  - Payments cover both memberships and sessions.
+  - A Session links one Member and one Trainer.
+
 # Scenario B: City Library Event & Book Lending System
 #### Business Context:
 The Central Library wants to manage book lending and cultural events.
 
 #### Requirements:
-
   - Members borrow books, with loan and return dates tracked.
   - Each book has title, author, and category.
   - Library organizes events; members can register.
   - Each event has one or more speakers/authors.
   - Rooms are booked for events and study.
   - Overdue fines apply for late returns.
+    
 ## ER Diagram:
 
 <img width="647" height="763" alt="image" src="https://github.com/user-attachments/assets/96e450a1-9210-4cda-aa04-6f42ce76b1c4" />
 
-
 ## Entities and Attributes
-Entity	Attributes (PK, FK)	Notes
-Member	MemberID (PK), Name, Address, Phone, Email	Library members
-Book	BookID (PK), Title, Author, Category, ISBN, PubYear	Books in collection
-Loan	LoanID (PK), LoanDate, DueDate, ReturnDate, FineAmount, MemberID (FK), BookID (FK)	Tracks book borrowing
-Event	EventID (PK), Name, Description, EventDate, StartTime, EndTime, RoomID (FK)	Library cultural events
-Speaker	SpeakerID (PK), Name, Bio, ContactInfo	Event speakers/authors
-Booking	BookingID (PK), BookingDate, StartTime, EndTime, RoomID (FK), MemberID (FK)	Study room reservations
+<table>
+  <tr>
+    <th>Entity</th>
+    <th>Attributes(PK, FK)</th>
+    <th>Notes</th>
+  </tr>
+  <tr>
+    <td>Member</td>
+    <td>MemberID (PK), Name, Address, Phone, Email</td>
+    <td>Library members</td>
+  </tr>
+  <tr>
+    <td>Book</td>
+    <td>BookID (PK), Title, Author, Category, ISBN, PubYear</td>
+    <td>Books in collection</td>
+  </tr>
+  <tr>
+    <td>Loan</td>
+    <td>LoanID (PK), LoanDate, DueDate, ReturnDate, FineAmount, MemberID (FK), BookID (FK)</td>
+    <td>Tracks book borrowing</td>
+  </tr>
+  <tr>
+    <td>Speaker</td>
+    <td>SpeakerID (PK), Name, Bio, ContactInfo</td>
+    <td>Event speakers/authors</td>
+  </tr>
+  <tr>
+    <td>Booking</td>
+    <td>BookingID (PK), BookingDate, StartTime, EndTime, RoomID (FK), MemberID (FK)</td>
+    <td>Study room reservations</td>
+  </tr>             
+</table>
+
 ## Relationships and Constraints
-Relationship	Cardinality	Participation	Notes
-Member–Book	M:N	Mandatory for Loan, Optional for Member/Book	Members borrow books
-Member–Event	M:N	Mandatory for Registration, Optional for Member/Event	Members register for events
-Event–Speaker	M:N	Mandatory for EventSpeaker, Optional for Event/Speaker	Events may have multiple speakers
-Event–Room	1:N	Mandatory for Event, Optional for Room	Each event in one room
-Room–Booking	1:N	Mandatory for Booking, Optional for Room	Rooms booked for study by members
+<table>
+  <tr>
+    <th>Relationship</th>
+    <th>Cardinality</th>
+    <th>Participation</th>
+    <th>Notes</th>
+  </tr>
+  <tr>
+    <td>Member–Book</td>
+    <td>M:N</td>
+    <td>Mandatory for Loan, Optional for Member/Book</td>
+    <td>Members borrow books</td>
+  </tr>
+  <tr>
+    <td>Member–Event</td>
+    <td>M:N</td>
+    <td>Mandatory for Registration, Optional for Member/Event</td>
+    <td>Members register for events</td>
+  </tr>
+  <tr>
+    <td>Event–Speaker</td>
+    <td>M:N</td>
+    <td>Mandatory for EventSpeaker, Optional for Event/Speaker</td>
+    <td>Events may have multiple speakers</td>
+  </tr>
+  <tr>
+    <td>Event–Room</td>
+    <td>1:N</td>
+    <td>Mandatory for Event, Optional for Room</td>
+    <td>Each event in one room</td>
+  </tr>
+  <tr>
+    <td>Room–Booking</td>
+    <td>1:N</td>
+    <td>Mandatory for Booking, Optional for Room</td>
+    <td>Rooms booked for study by members</td>
+  </tr>
+</table>
+	
 ## Assumptions
-Overdue fines are stored per Loan record.
-BookCopy not modeled
-Rooms serve both events and study bookings.
+  - Overdue fines are stored per Loan record.
+  - BookCopy not modeled
+  - Rooms serve both events and study bookings.
+    
 # Scenario C: Restaurant Table Reservation & Ordering
 #### Business Context:
 A popular restaurant wants to manage reservations, orders, and billing.
@@ -96,31 +199,103 @@ Waiters assigned to serve reservations.
 
 <img width="598" height="744" alt="image" src="https://github.com/user-attachments/assets/986b56ea-3e24-467d-a6ef-e61f2059079d" />
 
-
 ### Entities and Attributes
-Entity	Attributes (PK, FK)	Notes
-Customer	CustomerID (PK), Name, Email, Phone	Stores customer info
-Waiter	WaiterID (PK), Name, Shift, ContactInfo	Waiter details
-Table	TableID (PK), TableNumber, Capacity, Location	Restaurant tables
-Reservation	ReservationID (PK), ReservationDate, ReservationTime, NoOfGuests, Status, CustomerID (FK), TableID (FK)	Table bookings
-Order	OrderID (PK), OrderDate, OrderTime, Status, ReservationID (FK)	Orders linked to reservations
-Dish	DishID (PK), DishName, Description, Price, CategoryID (FK)	Menu items
-Bill	BillID (PK), BillDate, TotalAmount, ServiceCharge, Tax, Status, ReservationID (FK)	Final bill per reservation
-Assignment	AssignmentID (PK), WaiterID (FK), ReservationID (FK)	Resolves Waiter–Reservation
+<table>
+  <tr>
+    <th>Entity</th>
+    <th>Attributes (PK, FK)</th>
+    <th>Notes</th>
+  </tr>
+  <tr>
+    <td>Customer</td>
+    <td>CustomerID (PK), Name, Email, Phone</td>
+    <td>Stores customer info</td>
+  </tr>
+  <tr>
+    <td>Waiter</td>
+    <td>WaiterID (PK), Name, Shift, ContactInfo</td>
+    <td>Waiter details</td>
+  </tr>
+  <tr>
+    <td>Table</td>
+    <td>TableID (PK), TableNumber, Capacity, Location</td>
+    <td>Restaurant tables</td>
+  </tr>
+  <tr>
+    <td>Reservation</td>
+    <td>ReservationID (PK), ReservationDate, ReservationTime, NoOfGuests, Status, CustomerID (FK), TableID (FK)</td>
+    <td>Table bookings</td>
+  </tr>
+  <tr>
+    <td>Order</td>
+    <td>OrderID (PK), OrderDate, OrderTime, Status, ReservationID (FK)</td>
+    <td>Orders linked to reservations</td>
+  </tr>
+  <tr>
+    <td>Dish</td>
+    <td>DishID (PK), DishName, Description, Price, CategoryID (FK)</td>
+    <td>Menu items</td>
+  </tr>
+  <tr>
+    <td>Bill</td>
+    <td>BillID (PK), BillDate, TotalAmount, ServiceCharge, Tax, Status, ReservationID (FK)</td>
+    <td>Final bill per reservation</td>
+  </tr>
+  <tr>
+    <td>Assignment</td>
+    <td>AssignmentID (PK), WaiterID (FK), ReservationID (FK)</td>
+    <td>Resolves Waiter–Reservation</td>
+  </tr>
+</table>
+
 ### Relationships and Constraints
-Relationship	Cardinality	Participation	Notes
-Customer–Reservation	1:N	Mandatory for Reservation, Optional for Customer	One customer can have many reservations
-Reservation–Table	1:N	Mandatory for Reservation, Optional for Table	Each reservation is for one table
-Order–Dish	M:N	Mandatory for Order_Item, Optional for Order/Dish	An order can include many dishes
-Reservation–Bill	1:1	Mandatory for Bill, Optional for Reservation	One bill per reservation
-Waiter–Reservation	M:N	Mandatory for Assignment, Optional for Waiter/Reservation	Multiple waiters can serve a reservation
+<table>
+  <tr>
+    <th>Relationship</th>
+    <th>Cardinality</th>
+    <th>Participation</th>
+    <th>Notes</th>
+  </tr>
+  <tr>
+    <td>Customer–Reservation</td>
+    <td>1:N</td>
+    <td>Mandatory for Reservation, Optional for Customer</td>
+    <td>One customer can have many reservations</td>
+  </tr>
+  <tr>
+    <td>Reservation–Table</td>
+    <td>1:N</td>
+    <td>Mandatory for Reservation, Optional for Table</td>
+    <td>Each reservation is for one table</td>
+  </tr>
+  <tr>
+    <td>Order–Dish</td>
+    <td>M:N</td>
+    <td>Mandatory for Order_Item, Optional for Order/Dish</td>
+    <td>An order can include many dishes</td>
+  </tr>
+  <tr>
+    <td>Reservation–Bill</td>
+    <td>1:1</td>
+    <td>Mandatory for Bill, Optional for Reservation</td>
+    <td>One bill per reservation</td>
+  </tr>
+  <tr>
+    <td>Waiter–Reservation</td>
+    <td>M:N</td>
+    <td>Mandatory for Assignment, Optional for Waiter/Reservation</td>
+    <td>Multiple waiters can serve a reservation</td>
+  </tr>
+</table>
+
+
 ## Assumptions
-Walk-in customers are still recorded
-One bill per reservation
-Split payments not modeled; could extend with a Payment entity.
+  - Walk-in customers are still recorded
+  - One bill per reservation
+  - Split payments not modeled; could extend with a Payment entity.
 ## Instructions for Students
-Complete all three scenarios (A, B, C).
-Identify entities, relationships, and attributes for each.
-Draw ER diagrams using draw.io / diagrams.net or hand-drawn & scanned.
-Fill in all tables and assumptions for each scenario.
-Export the completed Markdown (with diagrams) as a single PDF
+  - Complete all three scenarios (A, B, C).
+  - Identify entities, relationships, and attributes for each.
+  - Draw ER diagrams using draw.io / diagrams.net or hand-drawn & scanned.
+  - Fill in all tables and assumptions for each scenario.
+  - Export the completed Markdown (with diagrams) as a single PDF
